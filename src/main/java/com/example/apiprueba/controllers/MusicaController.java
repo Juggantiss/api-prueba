@@ -3,6 +3,7 @@ package com.example.apiprueba.controllers;
 import com.example.apiprueba.models.MusicaModel;
 import com.example.apiprueba.services.MusicaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -33,14 +34,13 @@ public class MusicaController {
     }
 
     @PutMapping("/{id}")
-    public MusicaModel actualizarMusica(@PathVariable("id") String id, @Validated @RequestBody MusicaModel musica){
+    public ResponseEntity<MusicaModel> actualizarMusica(@PathVariable("id") String id, @Validated @RequestBody MusicaModel musica){
         musica.setId(id);
         return musicaService.actualizarMusica(musica);
     }
 
     @DeleteMapping("/{id}")
-    public String eliminarMusica(@PathVariable("id") String id){
-        musicaService.eliminarMusica(id);
-        return "Musica eliminada";
+    public ResponseEntity<HttpStatus> eliminarMusica(@PathVariable("id") String id){
+        return musicaService.eliminarMusica(id);
     }
 }

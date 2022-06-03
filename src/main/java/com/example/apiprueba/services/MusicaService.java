@@ -54,11 +54,31 @@ public class MusicaService {
         }
     }
 
-    public MusicaModel actualizarMusica(MusicaModel musica){
-        return musicaRepository.save(musica);
+    public ResponseEntity<MusicaModel> actualizarMusica(MusicaModel musica){
+        Optional<MusicaModel> musicaData = musicaRepository.findById(musica.getId());
+        if (musicaData.isPresent()){
+            MusicaModel _musica = musicaData.get();
+            _musica.setNombre(musica.getNombre());
+            _musica.setGenero(musica.getGenero());
+            _musica.setAutor(musica.getAutor());
+            _musica.setDuracion(musica.getDuracion());
+            return new ResponseEntity<>(musicaRepository.save(_musica), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    public void eliminarMusica(@PathVariable String id){
-        musicaRepository.deleteById(id);
+    public ResponseEntity<HttpStatus> eliminarMusica(String id){
+        try {
+            Optional<MusicaModel> musicaData = musicaRepository.findById(id);
+            if (musicaData.isPresent()){
+                musicaRepository.deleteById(id);
+                return new ResponseEntity<>(HttpStatus.OK);
+            }else{
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
