@@ -19,8 +19,8 @@ public class MusicaController {
     private MusicaService musicaService;
 
     @GetMapping
-    public ResponseEntity<List<MusicaModel>> obtenerMusicas(@RequestParam(required = false) String nombre){
-        return musicaService.obtenerMusicas(nombre);
+    public ResponseEntity<List<MusicaModel>> obtenerMusicas(@RequestParam(required = false) String autor){
+        return musicaService.obtenerMusicas(autor);
     }
 
     @GetMapping("/{id}")

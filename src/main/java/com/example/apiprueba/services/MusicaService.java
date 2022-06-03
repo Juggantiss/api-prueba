@@ -18,13 +18,13 @@ public class MusicaService {
     @Autowired
     private MusicaRepository musicaRepository;
 
-    public ResponseEntity<List<MusicaModel>> obtenerMusicas(String nombre){
+    public ResponseEntity<List<MusicaModel>> obtenerMusicas(String autor){
         try {
             List<MusicaModel> musicas = new ArrayList<MusicaModel>();
-            if (nombre == null) {
+            if (autor == null) {
                 musicaRepository.findAll().forEach(musicas::add);
             } else{
-                musicaRepository.findByNombreContaining(nombre).forEach(musicas::add);
+                musicaRepository.findByAutorContaining(autor).forEach(musicas::add);
             }
             if (musicas.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -8,8 +8,5 @@ import java.util.List;
 
 @Repository
 public interface MusicaRepository extends MongoRepository<MusicaModel, String> {
-//    MusicaModel buscarPorId(String id);
-    List<MusicaModel> findByNombreContaining(String nombre);
-//    List<MusicaModel> buscarPorAutor(String autor);
-
+    List<MusicaModel> findByAutorContaining(String autor);
 }
