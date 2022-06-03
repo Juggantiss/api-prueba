@@ -18,6 +18,15 @@ public class MusicaModel {
     @Field
     private String duracion;
 
+    //public MusicModel() {}
+
+    public MusicaModel(String nombre, String genero, String autor, String duracion) {
+        this.nombre = nombre;
+        this.genero = genero;
+        this.autor = autor;
+        this.duracion = duracion;
+    }
+
     public String getId() {
         return id;
     }
@@ -56,5 +65,10 @@ public class MusicaModel {
 
     public void setDuracion(String duracion) {
         this.duracion = duracion;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("MusicModel[id='%s', nombre='%s', genero='%s', autor='%s', duracion='%s']");
     }
 }
