@@ -44,8 +44,14 @@ public class MusicaService {
         }
     }
 
-    public MusicaModel guardarMusica(MusicaModel musica){
-        return musicaRepository.save(musica);
+    public ResponseEntity<MusicaModel> guardarMusica(MusicaModel musica){
+        try{
+            MusicaModel _musica = musicaRepository.save(new MusicaModel(musica.getNombre(),
+                    musica.getGenero(), musica.getAutor(), musica.getDuracion()));
+            return new ResponseEntity<>(_musica, HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     public MusicaModel actualizarMusica(MusicaModel musica){

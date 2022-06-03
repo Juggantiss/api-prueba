@@ -28,7 +28,7 @@ public class MusicaController {
     }
 
     @PostMapping
-    public MusicaModel guardarMusica(@RequestBody MusicaModel musica){
+    public ResponseEntity<MusicaModel> guardarMusica(@RequestBody MusicaModel musica){
         return musicaService.guardarMusica(musica);
     }
 
