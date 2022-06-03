@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
@@ -17,8 +18,8 @@ public class MusicaController {
     private MusicaService musicaService;
 
     @GetMapping
-    public ArrayList<MusicaModel> obtenerMusicas(){
-        return musicaService.obtenerMusicas();
+    public ResponseEntity<List<MusicaModel>> obtenerMusicas(@RequestParam(required = false) String nombre){
+        return musicaService.obtenerMusicas(nombre);
     }
 
     @GetMapping("/{id}")

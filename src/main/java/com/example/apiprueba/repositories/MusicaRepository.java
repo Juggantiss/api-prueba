@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface MusicaRepository extends MongoRepository<MusicaModel, String> {
 //    MusicaModel buscarPorId(String id);
-//    List<MusicaModel> buscarPorNombre(String nombre);
+    List<MusicaModel> findByNombreContaining(String nombre);
 //    List<MusicaModel> buscarPorAutor(String autor);
 
 }

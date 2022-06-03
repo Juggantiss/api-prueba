@@ -7,8 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,8 +18,21 @@ public class MusicaService {
     @Autowired
     private MusicaRepository musicaRepository;
 
-    public ArrayList<MusicaModel> obtenerMusicas(){
-        return (ArrayList<MusicaModel>) musicaRepository.findAll();
+    public ResponseEntity<List<MusicaModel>> obtenerMusicas(String nombre){
+        try {
+            List<MusicaModel> musicas = new ArrayList<MusicaModel>();
+            if (nombre == null) {
+                musicaRepository.findAll().forEach(musicas::add);
+            } else{
+                musicaRepository.findByNombreContaining(nombre).forEach(musicas::add);
+            }
+            if (musicas.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(musicas, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     public ResponseEntity<MusicaModel> obtenerMusicaPorId(String id){

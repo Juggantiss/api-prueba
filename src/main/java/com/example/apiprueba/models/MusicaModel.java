@@ -5,17 +5,13 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.persistence.*;
 
-@Document
+@Document(collection = "musica")
 public class MusicaModel {
     @Id
     private String id;
-    @Field
     private String nombre;
-    @Field
     private String genero;
-    @Field
     private String autor;
-    @Field
     private String duracion;
 
     public MusicaModel() {}
