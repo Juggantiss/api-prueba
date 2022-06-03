@@ -1,24 +1,28 @@
 package com.example.apiprueba.models;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import javax.persistence.*;
 
-@Entity
-@Table(name = "musica")
+@Document
 public class MusicaModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false)
-    private Long id;
+    private String id;
+    @Field
     private String nombre;
+    @Field
     private String genero;
+    @Field
     private String autor;
+    @Field
     private String duracion;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
