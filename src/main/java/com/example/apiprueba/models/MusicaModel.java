@@ -18,7 +18,7 @@ public class MusicaModel {
     @Field
     private String duracion;
 
-    //public MusicModel() {}
+    public MusicaModel() {}
 
     public MusicaModel(String nombre, String genero, String autor, String duracion) {
         this.nombre = nombre;
@@ -69,6 +69,6 @@ public class MusicaModel {
 
     @Override
     public String toString() {
-        return String.format("MusicModel[id='%s', nombre='%s', genero='%s', autor='%s', duracion='%s']");
+        return String.format("MusicaModelo[id='%s', nombre='%s', genero='%s', autor='%s', duracion='%s']");
     }
 }
